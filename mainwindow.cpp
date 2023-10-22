@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "useful_functions.h"
 
 #include <qdebug.h>
 
@@ -23,18 +24,28 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::sendValue(){
     QString RTUreq = ui->RTUreq->text();
-    RTUreq.remove(" ");
-    QString sendedReq;
-    //MEMENTO: mid(int position,int nbr_char)
-    sendedReq.append(RTUreq.mid(0,2)+" "); //slave
-    sendedReq.append(RTUreq.mid(2,2)+" "); //register
-    sendedReq.append(RTUreq.mid(4,2)+" "); //nbrBytes
-    bool ok = true;
-    unsigned int nbrBytes = RTUreq.mid(4,2).toUInt(&ok,16);
-    sendedReq.append(RTUreq.mid(6,nbrBytes*2)+" "); //data
-    sendedReq.append(RTUreq.mid(nbrBytes*2+6,4));
+    QString error;
+    checkSize(RTUreq, &error);
+    checkRegisterAddr(RTUreq, &error);
+    checkSlaveAddr(RTUreq, &error);
+    if(error.length() == 0){
+        RTUreq.remove(" ");
+        QString sendedReq;
+        //MEMENTO: mid(int position,int nbr_char)
+        sendedReq.append(RTUreq.midRef(0,2)+" "); //slave
+        sendedReq.append(RTUreq.midRef(2,2)+" "); //register
+        sendedReq.append(RTUreq.midRef(4,2)+" "); //nbrBytes
+        bool ok = true;
+        //check to see if we can put "true" directly in toUint()
+        unsigned int nbrBytes = RTUreq.midRef(4,2).toUInt(&ok,16);
+        sendedReq.append(RTUreq.midRef(6,nbrBytes*2)+" "); //data
+        sendedReq.append(RTUreq.midRef(nbrBytes*2+6,4));
 
-    ui->labelReq->setText(sendedReq);
+        ui->labelReq->setText(sendedReq);
+    }
+    else{
+        ui->labelReq->setText(error);
+    }
 }
 
 MainWindow::~MainWindow()

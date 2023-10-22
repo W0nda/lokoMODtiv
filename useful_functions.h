@@ -3,7 +3,7 @@
 
 #include <QString>
 
-void checkSize(QString, QString *);
+void returnReqSize(QString, QString *, QString *);
 void checkRegisterAddr(QString, QString *);
 void checkSlaveAddr(QString, QString *);
 

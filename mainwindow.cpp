@@ -17,30 +17,33 @@ MainWindow::MainWindow(QWidget *parent)
     ui->slave1->setRowCount(10);
     ui->slave1->setColumnCount(1);
     ui->slave1->horizontalHeader()->setStretchLastSection(true);
+    ui->slave1->setHorizontalHeaderLabels(QStringList("Slave 1"));
+
+    ui->slave2->setRowCount(10);
+    ui->slave2->setColumnCount(1);
+    ui->slave2->horizontalHeader()->setStretchLastSection(true);
+    ui->slave2->setHorizontalHeaderLabels(QStringList("Slave 2"));
+
+    slaveTab[0] = ui->slave1;
+    slaveTab[1] = ui->slave2;
 
     connect(ui->quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(ui->sendButton,SIGNAL(clicked()),this,SLOT(sendValue()));
 }
 
 void MainWindow::sendValue(){
-    QString RTUreq = ui->RTUreq->text();
     QString error;
-    checkSize(RTUreq, &error);
-    checkRegisterAddr(RTUreq, &error);
-    checkSlaveAddr(RTUreq, &error);
+    checkRegisterAddr(ui->RTUregLineEdit->text(), &error);
+    checkSlaveAddr(ui->RTUslaveLineEdit->text(), &error);
     if(error.length() == 0){
-        RTUreq.remove(" ");
+        QString size;
+        returnReqSize(ui->RTUvalueLineEdit->text(),&size,&error);
         QString sendedReq;
-        //MEMENTO: mid(int position,int nbr_char)
-        sendedReq.append(RTUreq.midRef(0,2)+" "); //slave
-        sendedReq.append(RTUreq.midRef(2,2)+" "); //register
-        sendedReq.append(RTUreq.midRef(4,2)+" "); //nbrBytes
-        bool ok = true;
-        //check to see if we can put "true" directly in toUint()
-        unsigned int nbrBytes = RTUreq.midRef(4,2).toUInt(&ok,16);
-        sendedReq.append(RTUreq.midRef(6,nbrBytes*2)+" "); //data
-        sendedReq.append(RTUreq.midRef(nbrBytes*2+6,4));
-
+        sendedReq.append(ui->RTUslaveLineEdit->text()+" ");
+        sendedReq.append(ui->RTUregLineEdit->text()+" ");
+        sendedReq.append(size+" ");
+        sendedReq.append(ui->RTUvalueLineEdit->text()+" ");
+        //CRC coming soon
         ui->labelReq->setText(sendedReq);
     }
     else{

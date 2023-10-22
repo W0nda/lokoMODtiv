@@ -14,6 +14,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget{background : rgb(68, 68, 68)}</string>
+   </property>
    <widget class="QPushButton" name="quitButton">
     <property name="geometry">
      <rect>
@@ -50,8 +53,8 @@
    <widget class="QPushButton" name="sendButton">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>410</y>
+      <x>70</x>
+      <y>500</y>
       <width>80</width>
       <height>25</height>
      </rect>
@@ -60,34 +63,17 @@
      <string>Send</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="RTUreq">
+   <widget class="QLabel" name="labelRTU">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>50</x>
       <y>340</y>
-      <width>113</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="ASCIIreq">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>370</y>
-      <width>113</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="labeRTU">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>340</y>
-      <width>71</width>
+      <width>121</width>
       <height>17</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;Sans Serif&quot;;</string>
     </property>
     <property name="text">
      <string>RTU Request</string>
@@ -96,11 +82,14 @@
    <widget class="QLabel" name="labelASCII">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>370</y>
-      <width>81</width>
+      <x>300</x>
+      <y>340</y>
+      <width>131</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14pt &quot;Sans Serif&quot;;</string>
     </property>
     <property name="text">
      <string>ASCII Request</string>
@@ -109,8 +98,8 @@
    <widget class="QLabel" name="labelReq">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>340</y>
+      <x>220</x>
+      <y>470</y>
       <width>311</width>
       <height>21</height>
      </rect>
@@ -120,28 +109,31 @@
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{ background : rgb(255, 255, 127)}</string>
+    </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="labelSend">
+   <widget class="QLabel" name="sendLabel">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>340</y>
-      <width>52</width>
+      <x>180</x>
+      <y>480</y>
+      <width>31</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Send</string>
+     <string>Sent</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelResp">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>380</y>
+      <x>220</x>
+      <y>500</y>
       <width>311</width>
       <height>21</height>
      </rect>
@@ -151,21 +143,172 @@
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel {background: rgb(255, 255, 127)}</string>
+    </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="receivedLabel">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>380</y>
+      <x>160</x>
+      <y>500</y>
       <width>52</width>
       <height>17</height>
      </rect>
     </property>
     <property name="text">
      <string>Received</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="slave2">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>20</y>
+      <width>161</width>
+      <height>311</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="RTUslaveLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>370</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="RTUregLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>400</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="RTUvalueLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>430</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="RTUslaveLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>380</y>
+      <width>52</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Slave</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="RTUregLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>410</y>
+      <width>52</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Register</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="RTUvalueLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>440</y>
+      <width>52</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Value</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ASCIIslaveLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>370</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>440</y>
+      <width>52</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Value</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ASCIIregLabel">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>410</y>
+      <width>52</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Register</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ASCIIslaveLabel">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>380</y>
+      <width>52</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Slave</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ASCIIvalueLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>430</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ASCIIregLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>400</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
     </property>
    </widget>
   </widget>

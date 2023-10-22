@@ -1,19 +1,16 @@
-#include <useful_functions.h>
+#define CRC16 0x8005
 
+#include <useful_functions.h>
 #include <QDebug>
 
-void checkSize(QString str, QString *error){
-    bool ok = true;
-    unsigned int expectedSize = str.midRef(4,2).toUInt(&ok,16) * 2;
-    expectedSize = expectedSize + 10; //5 "bytes" * 2 char
-    if(expectedSize != str.length()){
-        error->append("badSize ");
-    }
+void returnReqSize(QString str, QString *size, QString *error){
+    unsigned int UIntsize = str.length()/2;
+    *size = "0"+QString::number(UIntsize,16);
 }
 
 void checkRegisterAddr(QString str, QString *error){
     bool ok = true;
-    unsigned int registerAddr = str.midRef(2,2).toUInt(&ok,16);
+    unsigned int registerAddr = str.toUInt(&ok,16);
     qDebug()<<"regAddr"<<registerAddr;
     if(registerAddr > 10 || registerAddr < 1){
         error->append("badRegAddr ");
@@ -22,9 +19,12 @@ void checkRegisterAddr(QString str, QString *error){
 
 void checkSlaveAddr(QString str, QString *error){
     bool ok = true;
-    unsigned int slaveAddr = str.midRef(0,2).toUInt(&ok,16);
+    unsigned int slaveAddr = str.toUInt(&ok,16);
     qDebug()<<"slaveAddr"<<slaveAddr;
-    if(slaveAddr != 1){
+    if(slaveAddr > 2 || slaveAddr < 1){
         error->append("badSlaveAddr");
     }
 }
+
+int genCRC16(QString str);
+/*return 2 bytes, change "int" by something more appropriate*/

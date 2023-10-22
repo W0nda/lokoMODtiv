@@ -21,5 +21,6 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    QTableWidget *slaveTab[];
 };
 #endif // MAINWINDOW_H
